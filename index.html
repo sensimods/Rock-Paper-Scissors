@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.2.1/css/all.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.2.1/css/sharp-solid.css"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <main>
+      <section class="game-window">
+        <section class="heading">Rock Paper Scissors</section>
+        <section class="gameplay-window">
+          <div class="gameplay-heading">
+            <div class="gameplay-heading-section">
+              <h2>You</h2>
+              <span class="scores" id="player1Score">0</span>
+            </div>
+            <div class="gameplay-heading-section">
+              <button class="options" data-value="rock">
+                <i class="fa-thin fa-hand-back-fist"></i>
+              </button>
+              <button class="options" data-value="paper">
+                <i class="fa-thin fa-hand"></i>
+              </button>
+              <button class="options" data-value="scissors">
+                <i class="fa-thin fa-hand-scissors scissors-upright"></i>
+              </button>
+            </div>
+            <div class="gameplay-heading-section">
+              <h2>Computer</h2>
+              <span class="scores" id="computerScore">0</span>
+            </div>
+          </div>
+          <div class="gameplay">
+            <div id="player1" class="gameplay-section player-section">
+              <i
+                class="fa-duotone fa-hand-back-fist inplay-icons fist-right starting-icon"
+              ></i>
+            </div>
+            <div class="gameplay-section">
+              <h2 id="results"></h2>
+            </div>
+            <div id="computer" class="gameplay-section player-section">
+              <i
+                class="fa-duotone fa-hand-back-fist inplay-icons fist-left starting-icon"
+              ></i>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>

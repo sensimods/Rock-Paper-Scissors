@@ -1,0 +1,163 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+main {
+  width: 80%;
+  height: 80%;
+  background-color: #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-window {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(40, 40, 40, 0.7),
+    rgba(231, 160, 7, 0.7)
+  );
+  padding: 2%;
+  color: #fff;
+}
+
+.heading {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 2%;
+  word-spacing: 2rem;
+}
+
+.scissors-upright {
+  transform: rotate(80deg);
+}
+
+.gameplay-window {
+  width: 100%;
+  height: 88%;
+}
+
+.gameplay-heading {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
+  margin-bottom: 2%;
+}
+
+.gameplay-heading-section {
+  width: 33.33%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  padding-top: 2%;
+}
+
+.options {
+  width: 30%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 3.5rem;
+  background-color: transparent;
+  color: #fff;
+  transition: all 0s ease-in-out;
+}
+
+.options:hover {
+  transform: scale(1.5);
+}
+
+.option-active {
+  transform: scale(1.5);
+}
+
+.gameplay {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gameplay-section {
+  width: 33%;
+  height: 100%;
+}
+
+.player-section {
+  position: relative;
+}
+
+#results {
+  text-align: center;
+  margin-top: 2%;
+  font-size: 3rem;
+}
+
+.inplay-icons {
+  font-size: 8rem;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+}
+
+.fist-right {
+  transform: rotate(90deg);
+}
+
+.fist-left {
+  transform: rotate(90deg) rotateX(180deg);
+}
+
+.paper-right {
+  transform: rotate(90deg);
+}
+
+.paper-left {
+  transform: rotate(90deg) rotateX(180deg);
+}
+
+.scissors-right {
+  transform: rotate(180deg) rotateX(180deg);
+}
+
+.animate-fist {
+  animation: bounce 500ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms 3 normal
+    forwards;
+}
+
+.scores {
+  margin-top: 2%;
+  font-size: 2rem;
+}
+
+@keyframes bounce {
+  0% {
+    top: 30%;
+  }
+
+  50% {
+    top: 40%;
+  }
+
+  100% {
+    top: 30%;
+  }
+}
