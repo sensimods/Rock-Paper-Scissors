@@ -5,7 +5,7 @@ const player1ScoreContainer = document.querySelector('#player1Score')
 const computerScoreContainer = document.querySelector('#computerScore')
 const resultsContainer = document.querySelector('#results')
 
-const options = {
+const icons = {
   start: {
     playerIcon:
       '<i class="fa-duotone fa-hand-back-fist inplay-icons fist-right starting-icon animate-fist"></i>',
@@ -25,18 +25,22 @@ const options = {
   scissors: {
     playerIcon:
       '<i class="fa-thin fa-hand-scissors scissors-right inplay-icons"></i>',
-    computerIcon:
-      '<i class="fa-thin fa-hand-scissors scissors-left inplay-icons"></i>',
+    computerIcon: '<i class="fa-thin fa-hand-scissors inplay-icons"></i>',
   },
 }
 
-let playerSelection = null
-let computerSelection = null
+const options = ['rock', 'paper', 'scissors']
+
+const shuffleOptions = () => {
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[options[i], options[j]] = [options[j], options[i]]
+  }
+}
+
 let player1Score = 0
 let computerScore = 0
-let winner = null
-let computerIcon = null
-let player1Icon = null
+let player1Icon, playerSelection, computerIcon, computerSelection, result
 
 optionBtns.forEach(option => {
   option.addEventListener('click', function () {
@@ -49,15 +53,14 @@ optionBtns.forEach(option => {
     })
     resultsContainer.innerText = ''
     playerSelection = this.dataset.value
-    player1Container.innerHTML = options.start.playerIcon
-    computerContainer.innerHTML = options.start.computerIcon
     computerSelection = getComputerSelection()
+    player1Container.innerHTML = icons.start.playerIcon
+    computerContainer.innerHTML = icons.start.computerIcon
 
-    const animatedFist = document.querySelectorAll('.animate-fist')[0]
+    const animatedFist = document.querySelector('.animate-fist')
     animatedFist.addEventListener('animationend', function () {
       determineWinner()
-      displayIcons()
-      showResult()
+      displayResults()
     })
   })
 })
@@ -67,22 +70,13 @@ const getComputerSelection = () => {
     btn.setAttribute('disabled', true)
   })
 
-  let selection = Math.floor(Math.random() * 3)
-  switch (selection) {
-    case 0:
-      return 'rock'
-    case 1:
-      return 'paper'
-    case 2:
-      return 'scissors'
-    default:
-      return null
-  }
+  shuffleOptions()
+  return options[Math.floor(Math.random() * options.length)]
 }
 
 const determineWinner = () => {
   if (playerSelection === computerSelection) {
-    return (winner = "It's a draw!")
+    return (result = "It's a draw!")
   }
 
   if (
@@ -90,20 +84,12 @@ const determineWinner = () => {
     (playerSelection === 'paper' && computerSelection === 'rock') ||
     (playerSelection === 'scissors' && computerSelection === 'paper')
   ) {
-    player1Score += 1
-    return (winner = 'You win!')
+    player1Score++
+    return (result = 'You win!')
   }
 
-  computerScore += 1
-  return (winner = 'Computer wins!')
-}
-
-const showResult = () => {
-  resultsContainer.innerText = winner
-  player1ScoreContainer.innerText = player1Score
-  computerScoreContainer.innerText = computerScore
-
-  resetGame()
+  computerScore++
+  return (result = 'Computer wins!')
 }
 
 const resetGame = () => {
@@ -111,42 +97,45 @@ const resetGame = () => {
     btn.removeAttribute('disabled')
     btn.classList.remove('option-active')
   })
-
-  playerSelection = null
-  computerSelection = null
-  winner = null
-  computerIcon = null
-  player1Icon = null
 }
 
-const displayIcons = () => {
+const displayResults = () => {
+  let ps, cs
   switch (playerSelection) {
     case 'rock':
-      player1Container.innerHTML = options.rock.playerIcon
+      ps = icons.rock.playerIcon
       break
     case 'paper':
-      player1Container.innerHTML = options.paper.playerIcon
+      ps = icons.paper.playerIcon
       break
     case 'scissors':
-      player1Container.innerHTML = options.scissors.playerIcon
+      ps = icons.scissors.playerIcon
       break
     default:
-      player1Container.innerHTML = options.start.playerIcon
+      ps = icons.start.playerIcon
       break
   }
 
   switch (computerSelection) {
     case 'rock':
-      computerContainer.innerHTML = options.rock.computerIcon
+      cs = icons.rock.computerIcon
       break
     case 'paper':
-      computerContainer.innerHTML = options.paper.computerIcon
+      cs = icons.paper.computerIcon
       break
     case 'scissors':
-      computerContainer.innerHTML = options.scissors.computerIcon
+      cs = icons.scissors.computerIcon
       break
     default:
-      computerContainer.innerHTML = options.start.computerIcon
+      cs = icons.start.computerIcon
       break
   }
+
+  player1Container.innerHTML = ps
+  computerContainer.innerHTML = cs
+  resultsContainer.innerText = result
+  player1ScoreContainer.innerText = player1Score
+  computerScoreContainer.innerText = computerScore
+
+  resetGame()
 }
